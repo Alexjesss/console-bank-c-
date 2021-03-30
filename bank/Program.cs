@@ -23,20 +23,23 @@ namespace bank
 
         public void Withdraw(int amount)
         {
-            if (Balance <= amount )
+            if (amount > Balance )
             {
-                Console.WriteLine("You broke.");
+                Console.WriteLine("You broke. You don't have that much in your bank.");
             }
             else
             {
                 Balance -= amount;
                 Console.WriteLine("withdraw succesfull.");
+                Console.WriteLine("Your current balance is \t" + Balance);
             }    
         }
 
         public void Deposit(int amount)
         {
             Balance += amount;
+            Console.WriteLine("You have added \t" + amount + "\t to your account");
+            Console.WriteLine("Your current balance is \t" + Balance);
         } 
     }
 
