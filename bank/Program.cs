@@ -23,26 +23,22 @@ namespace bank
 
         public void Withdraw(int amount)
         {
-            if (amount <= 0 )
+            if (Balance <= amount )
             {
                 Console.WriteLine("You broke.");
             }
             else
             {
                 Balance -= amount;
-                Console.WriteLine("Yo, you a rich b*tch.");
-            }
-            
+                Console.WriteLine("withdraw succesfull.");
+            }    
         }
 
         public void Deposit(int amount)
         {
             Balance += amount;
         } 
-
     }
-
-    
 
     class Client
     {
@@ -65,24 +61,35 @@ namespace bank
         {
             
             Console.WriteLine("Helloooow, What's your name?");
-            string Alexandra = Console.ReadLine();
-            Console.WriteLine("Hi \t" + Alexandra);
+            var name = Console.ReadLine();
+            Console.WriteLine("Hi \t" + name);
+            Console.WriteLine("What type of bank account do you have?");
+            var type = Console.ReadLine();
+            Console.WriteLine("How poor or rich are you at the moment?");
+            int balance = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Would you like to Deposit or Withdraw your moneyz, or Check if you even have money?");
-            int Amount = Console.ReadLine();
-
-            var moneyman = new Client(1, Alexandra);
+            var answer = Console.ReadLine();
+            var moneyman = new Client(1, name);
             var BankAccount = new BankAccount(moneyman, balance, type);
-            BankAccount.CheckBalance();
-            BankAccount.Withdraw(amount);
-            BankAccount.Deposit(amount);
-            var amount = Console.ReadLine();
-            var deposit = Console.ReadLine();
 
-           
 
-       
+            if (answer == "check")
+            {
+                Console.WriteLine("Your balance now is" + BankAccount.CheckBalance());
+                BankAccount.CheckBalance();
+            }
+            else if (answer == "deposit")
+            {
+                Console.WriteLine("How much do you want to deposit laddy?");
+                var amount = Convert.ToInt32(Console.ReadLine());
+                BankAccount.Deposit(amount);
+            }
+            else
+            {
+                Console.WriteLine("How much do you want to withdraw?");
+                var amount = Convert.ToInt32(Console.ReadLine());
+                BankAccount.Withdraw(amount);
+            }
         }
     }
-
-
 }
